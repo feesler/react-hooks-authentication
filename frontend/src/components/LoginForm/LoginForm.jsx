@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import AuthContext from '../../contexts/AuthContext.js';
+import useAuth from '../../hooks/useAuth.js';
 
 const initialState = {
   login: '',
@@ -9,7 +9,7 @@ const initialState = {
 
 function LoginForm(props) {
   const [state, setState] = useState(initialState)
-  const { token, handleLogin } = useContext(AuthContext);
+  const { profile, handleLogin } = useAuth();
 
   const handleChange = (e) => {
     setState((prev) => ({
@@ -24,7 +24,7 @@ function LoginForm(props) {
     handleLogin(state.login, state.password);
   }
 
-  if (token) {
+  if (profile) {
     return null;
   }
 
@@ -52,7 +52,6 @@ function LoginForm(props) {
 }
 
 LoginForm.propTypes = {
-
 };
 
 export default LoginForm;

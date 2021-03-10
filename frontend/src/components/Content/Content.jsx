@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AuthContext from '../../contexts/AuthContext.js';
+import useAuth from '../../hooks/useAuth.js';
 import Banner from '../Banner/Banner.jsx';
 import NewsList from '../NewsList/NewsList.jsx';
 
 function Content(props) {
-  const { profile } = useContext(AuthContext);
+  const { profile } = useAuth();
 
 console.log('[Content] profile: ', profile);
 
@@ -21,7 +21,6 @@ console.log('[Content] profile: ', profile);
 }
 
 Content.propTypes = {
-
 };
 
 export default Content;

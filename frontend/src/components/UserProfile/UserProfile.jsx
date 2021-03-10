@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AuthContext from '../../contexts/AuthContext.js';
+import useAuth from '../../hooks/useAuth.js';
 import LoginForm from '../LoginForm/LoginForm.jsx';
 
 function UserProfile(props) {
-  const { profile, handleLogout } = useContext(AuthContext);
+  const { profile, handleLogout } = useAuth();
 
 console.log('[UserProfile] profile: ', profile);
 
@@ -22,7 +22,6 @@ console.log('[UserProfile] profile: ', profile);
 }
 
 UserProfile.propTypes = {
-
 };
 
 export default UserProfile;

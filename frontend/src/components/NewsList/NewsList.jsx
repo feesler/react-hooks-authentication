@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../../contexts/AuthContext.js';
+import React, { useState, useEffect } from 'react';
+import useAuth from '../../hooks/useAuth.js';
 import Card from '../Card/Card.jsx';
 
 const newsUrl = process.env.REACT_APP_NEWS_URL;
 
 function NewsList() {
-  const { profile, sendRequest } = useContext(AuthContext);
+  const { profile, sendRequest } = useAuth();
   const [news, setNews] = useState([]);
 
   useEffect(() => {
