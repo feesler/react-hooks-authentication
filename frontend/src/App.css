@@ -120,6 +120,11 @@
   border-radius: 50%;
   overflow: hidden;
   margin: 0 0.75rem;
+  background-color: #c5c5c5;
+  background-image: url(./assets/user-icon.svg);
+  background-size: 1.25rem 1.25rem;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .profile__avatar img {
