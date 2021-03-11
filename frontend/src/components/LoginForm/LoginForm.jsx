@@ -9,7 +9,7 @@ const initialState = {
 
 function LoginForm(props) {
   const [state, setState] = useState(initialState)
-  const { profile, handleLogin } = useAuth();
+  const { profile, logIn } = useAuth();
 
   const handleChange = (e) => {
     setState((prev) => ({
@@ -21,7 +21,7 @@ function LoginForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    handleLogin(state.login, state.password);
+    logIn(state.login, state.password);
   }
 
   if (profile) {

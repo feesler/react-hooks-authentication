@@ -22,9 +22,7 @@ function NewsList() {
       requestNews();
     }
 
-    return () => {
-      canceled = true;
-    }
+    return () => { canceled = true; };
   }, []);
 
   if (!profile) {
