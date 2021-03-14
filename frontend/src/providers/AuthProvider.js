@@ -22,13 +22,13 @@ function AuthProvider(props) {
         body: JSON.stringify({ login, password }),
       });
 
-      if (!response.ok) {
-        throw new Error('Authentication failed');
-      }
-
       const authResult = await response.json();
-      if (!authResult || !authResult.token) {
-        throw new Error('Authentication failed');
+      if (!response.ok || !authResult || !authResult.token) {
+        const errorMessage = (authResult && authResult.message)
+          ? authResult.message
+          : 'Authentication failed';
+
+        throw new Error(errorMessage);
       }
 
       setToken(authResult.token);

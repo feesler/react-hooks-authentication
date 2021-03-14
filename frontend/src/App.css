@@ -115,6 +115,7 @@
   font-size: 1.5rem;
   font-weight: 400;
   white-space: nowrap;
+  margin-right: auto;
 }
 
 .login-form {

@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth.js';
 const initialState = {
   login: '',
   password: '',
+  validated: false,
 };
 
 const initialValidation = {
@@ -16,13 +17,14 @@ const initialValidation = {
 function LoginForm(props) {
   const [state, setState] = useState(initialState);
   const [validation, setValidation] = useState(initialValidation);
-  const { profile, logIn } = useAuth();
+  const { profile, error, logIn } = useAuth();
 
   const handleChange = (e) => {
     setValidation(initialValidation);
     setState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+      validated: false,
     }));
   }
 
@@ -38,6 +40,11 @@ function LoginForm(props) {
       return;
     }
 
+    setState((prev) => ({
+      ...prev,
+      validated: true,
+    }));
+
     logIn(state.login, state.password);
   }
 
@@ -46,31 +53,37 @@ function LoginForm(props) {
   }
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <div className="col me-2">
-        <input
-          className={classNames('form-control', { 'is-invalid': !validation.login })}
-          type="text"
-          name="login"
-          onChange={handleChange}
-          value={state.login}
-          placeholder="Username"
-        />
-        <div className="invalid-feedback">Input login</div>
-      </div>
-      <div className="col me-2">
-        <input
-          className={classNames('form-control', { 'is-invalid': !validation.password })}
-          type="password"
-          name="password"
-          onChange={handleChange}
-          value={state.password}
-          placeholder="Password"
-        />
-        <div className="invalid-feedback">Input password</div>
-      </div>
-      <button className="btn btn-outline-success" type="submit">Login</button>
-    </form>
+    <div className="col">
+      <form
+        className={classNames('login-form', { 'is-invalid': error && state.validated })}
+        onSubmit={handleSubmit}
+      >
+        <div className="col me-2">
+          <input
+            className={classNames('form-control', { 'is-invalid': !validation.login })}
+            type="text"
+            name="login"
+            onChange={handleChange}
+            value={state.login}
+            placeholder="Username"
+          />
+          <div className="invalid-feedback">Input login</div>
+        </div>
+        <div className="col me-2">
+          <input
+            className={classNames('form-control', { 'is-invalid': !validation.password })}
+            type="password"
+            name="password"
+            onChange={handleChange}
+            value={state.password}
+            placeholder="Password"
+          />
+          <div className="invalid-feedback">Input password</div>
+        </div>
+        <button className="btn btn-outline-success" type="submit">Login</button>
+      </form>
+      <div className="invalid-feedback">{error}</div>
+    </div>
   )
 }
 
